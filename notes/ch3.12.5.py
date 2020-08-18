@@ -3,7 +3,7 @@
 # ch3.12.5.py
 # @author 刘秋
 # @email lq@aqiu.info
-# @description 
+# @description  两种移动视图的方式 shift tshift
 # @created 2020-08-17T09:09:03.785Z+08:00
 # @last-modified 2020-08-17T11:15:17.332Z+08:00
 #
@@ -30,17 +30,17 @@ goog.asfreq('BA').plot(style='--')
 plt.legend(['input','resample','asfreq'],loc='upper left')
 # plt.xlabels(['2006','2007','2006','2009','2010','2011'])
 
-############  2
+############  2   两种移动索引的方式
 fig,ax = plt.subplots(3,sharey=True,figsize=(20,8),dpi=80)
 goog = goog.asfreq('D',method='pad')
 goog.plot(ax=ax[0])
-goog.shift(900).plot(ax=ax[1])
-goog.tshift(900).plot(ax=ax[2])
+goog.shift(900).plot(ax=ax[1])  #移动视图 ,索引跟着动
+goog.tshift(900).plot(ax=ax[2]) # 移动索引,数据不动
 
 local_max = pd.to_datetime('2007-11-05')
 offset = pd.Timedelta(900,'D')
 
-# 图例和标签
+# 图例和标签  
 ax[0].legend(['input'],loc = 2)
 ax[0].get_xticklabels()[4].set(weight='heavy',color='red')
 ax[0].axvline(local_max,alpha=0.3,color='red')
@@ -59,7 +59,7 @@ ROI = 100*(goog.tshift(-365)/goog -1)
 FIG, AX = plt.subplots(figsize=(20,8),dpi=80)
 ROI.plot(ax=AX)
 AX.set_ylabel('% Return on Investment')
-AX.axvline(0,alpha=0.3,color='red')
+AX.axhline(y=50,alpha=0.3,color='red')  # 画一条横线
 ################
 
 #################  4
